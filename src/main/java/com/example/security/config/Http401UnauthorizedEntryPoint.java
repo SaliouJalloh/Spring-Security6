@@ -4,7 +4,6 @@ import com.example.security.handlers.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,7 @@ public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
     HttpServletRequest, l'objet HttpServletResponse et l'exception AuthenticationException.
      */
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         log.error("Unauthorized error: {}", authException.getMessage());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -42,7 +41,7 @@ public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
         // register the JavaTimeModule, which enables Jackson to support Java 8 and higher date and time types
         mapper.registerModule(new JavaTimeModule());
         // ask Jackson to serialize dates as strings in the ISO 8601 format
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,false);
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         mapper.writeValue(response.getOutputStream(), body);
     }
 }

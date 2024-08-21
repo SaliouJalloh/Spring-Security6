@@ -16,7 +16,7 @@ import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
 @OpenAPIDefinition(
         info = @Info(
                 contact = @Contact(
@@ -50,7 +50,7 @@ import org.springframework.context.annotation.Configuration;
 )
 
 public class OpenAPIConfiguration {
-    //@Bean
+    @Bean
     public OpenApiCustomizer schemaCustomizer() {
         ResolvedSchema resolvedSchema = ModelConverters.getInstance()
                 .resolveAsResolvedSchema(new AnnotatedType(ErrorResponse.class));
