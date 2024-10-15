@@ -26,18 +26,18 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
+        http
+                .csrf(AbstractHttpConfigurer::disable)
                 .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(unauthorizedEntryPoint)
-                        .accessDeniedHandler(accessDeniedHandler))
-                .authorizeHttpRequests(request ->
-                        request
-                                .requestMatchers(
-                                        "/**"
-                                ).permitAll()
-                                //.requestMatchers("/api/v1/admin/resource").hasRole("ADMIN") replaced with annotation in AuthorizationController
-                                .anyRequest()
-                                .authenticated()
+                        .accessDeniedHandler(accessDeniedHandler)
+                )
+                .authorizeHttpRequests(request -> request
+                        .requestMatchers("/**")
+                        .permitAll()
+                        //.requestMatchers("/api/v1/admin/resource").hasRole("ADMIN") replaced with annotation in AuthorizationController
+                        .anyRequest()
+                        .authenticated()
                 )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)

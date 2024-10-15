@@ -3,7 +3,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/db_security
     username: postgres
-    password: passroot
+    password: test
   jpa:
     hibernate:
       ddl-auto: create
@@ -20,5 +20,7 @@ application:
     jwt:
       secret-key: 586B633834416E396D7436753879382F423F4428482B4C6250655367566B5970
       expiration: 86400000 # a day
+      cookie-name: jwt-cookie
       refresh-token:
         expiration: 604800000 # 7 days
+        cookie-name: refresh-jwt-cookie

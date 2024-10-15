@@ -3,6 +3,8 @@ package com.example.security.service;
 import com.example.security.entities.RefreshToken;
 import com.example.security.service.payload.request.RefreshTokenRequest;
 import com.example.security.service.payload.response.RefreshTokenResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.ResponseCookie;
 
 import java.util.Optional;
 
@@ -31,4 +33,12 @@ public interface RefreshTokenService {
      génère un nouveau token JWT à l'aide du JwtService, puis renvoie la réponse.
      */
     RefreshTokenResponse generateNewToken(RefreshTokenRequest request);
+
+    ResponseCookie generateRefreshTokenCookie(String token);
+
+    String getRefreshTokenFromCookies(HttpServletRequest request);
+
+    void deleteByToken(String token);
+
+    ResponseCookie getCleanRefreshTokenCookie();
 }

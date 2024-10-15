@@ -8,9 +8,9 @@ import lombok.Setter;
 import java.util.List;
 
 
-@Getter @Setter
+@Getter
+@Setter
 @Builder
-// permet d'encapsuler les données de la réponse d'authentification
 public class AuthenticationResponse {
 
     private Long id;
